@@ -19,7 +19,7 @@ export const VerticalActionCard = ({ data, onClick }: { data: CardData, onClick:
           hover: { opacity: 1, y: 0, scale: 1 }
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="absolute -top-16 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
+        className="absolute -top-16 left-1/2 -translate-x-1/2 hidden lg:flex lg:flex-col items-center pointer-events-none"
       >
         <span className="text-[14px] font-light text-black whitespace-nowrap mb-[-10px]">Click me!</span>
         <svg width="60" height="90" viewBox="0 0 60 90" fill="none" className="text-black transform translate-x-2">
@@ -34,20 +34,18 @@ export const VerticalActionCard = ({ data, onClick }: { data: CardData, onClick:
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="h-full"
       >
-        <Card
-          onClick={onClick} 
-          className="bg-[#F9EBEC] rounded-[32px] p-10 w-full md:w-[280px] h-[461px] border-none flex flex-col justify-between cursor-pointer group transition-colors hover:bg-[#F2DADF] shadow-none"
-        >
-          <div className="flex-1 flex items-center justify-center">
-            <div className="rotate-180 h-[230px] [writing-mode:vertical-rl] flex flex-col items-start gap-4">
+        <Card className="bg-[#F9EBEC] rounded-[32px] h-full lg:h-[461px] w-full md:w-[280px]  border-none flex flex-row lg:flex-col justify-between p-4 md:p-6 transition-colors hover:bg-[#F2DADF] overflow-hidden">
+          <div className="flex-1 flex items-center  justify-center">
+                    <motion.div 
+                       layout  className="lg:rotate-180 lg:h-[230px] lg:[writing-mode:vertical-rl] flex flex-col items-start gap-2">
               <span className="text-[#C33241] font-bold text-[24px] uppercase tracking-widest">{data.title}</span>
               <p className="text-[#C33241]/80 text-[18px] font-medium leading-tight">{data.description}</p>
-            </div>
+            </motion.div>
           </div>
-          <div className="flex items-start justify-center text-[#C33241]">
+                <motion.div layout className="flex flex-row items-center  justify-center text-[#C33241]">
             <span className="text-[100px] font-bold leading-[0.8] tracking-tighter">{data.count}</span>
             <span className="text-[40px] font-bold mt-1 ml-1">+</span>
-          </div>
+          </motion.div>
         </Card>
       </motion.div>
     </motion.div>

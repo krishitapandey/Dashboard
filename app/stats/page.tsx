@@ -24,7 +24,7 @@ export default function CourseStats() {
       <LayoutGroup>
         <motion.div 
           layout
-          className="flex flex-col lg:flex-row gap-6 items-center justify-center min-h-[500px]"
+        className="flex flex-col lg:flex-row gap-4 items-stretch justify-center min-h-[500px] lg:h-[461px] w-full"
         >
           {initialCards.map((card) => (
             <React.Fragment key={card.id}>
