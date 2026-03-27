@@ -21,12 +21,17 @@ import {
 export function UserPosts({ userId, initialPosts }: { userId: number, initialPosts: Post[] }) {
   const { posts, setPosts, addPost, updatePost, deletePost } = usePostStore();
   const userPosts = posts[userId] || [];
+  const [isMounted, setIsMounted] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [deletingPostId, setDeletingPostId] = useState<number | null>(null);
   const postsPerPage = 5;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
 
@@ -65,6 +70,7 @@ export function UserPosts({ userId, initialPosts }: { userId: number, initialPos
     }
   };
 
+  if (!isMounted) return <div className="animate-pulse">Loading posts...</div>;
  
   const totalPages = Math.ceil(userPosts.length / postsPerPage);
   const startIndex = (currentPage - 1) * postsPerPage;

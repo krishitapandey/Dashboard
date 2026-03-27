@@ -1,21 +1,22 @@
-
 import { UserPosts } from '@/components/Dashboard/UserPostsClient';
 import { Post } from '@/types/post.types';
+import { notFound } from 'next/navigation';
 
-export default async function UserPostsPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
-  const userId = parseInt(resolvedParams.id, 10);
+interface Props {
+  params: Promise<{ id: string }>;
+}
 
+export default async function UserPostsPage({ params }: Props) {
+  const { id } = await params;
+  const userId = parseInt(id, 10);
+  const apiUrl = process.env.API_URL ;
 
-  const apiUrl = process.env.API_URL;
-  
-  const postsRes = await fetch(`${apiUrl}/posts?userId=${userId}`, {
-    cache: 'no-store'
-  });
-  
-  const userRes = await fetch(`${apiUrl}/users/${userId}`, {
-    cache: 'no-store'
-  });
+  if (isNaN(userId)) return notFound();
+
+  const [postsRes, userRes] = await Promise.all([
+    fetch(`${apiUrl}/posts?userId=${userId}`, { next: { revalidate: 60 } }),
+    fetch(`${apiUrl}/users/${userId}`, { next: { revalidate: 3600 } })
+  ]);
 
   if (!postsRes.ok || !userRes.ok) {
     return <div className="p-8 text-red-500">Failed to load data for this user.</div>;
@@ -25,19 +26,20 @@ export default async function UserPostsPage({ params }: { params: Promise<{ id: 
   const userData = await userRes.json();
 
   return (
-    <main className=" bg-gray-50 pt-10 pb-20">
-      <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 rounded-lg mb-8 border border-primary flex flex-col md:flex-row md:items-center md:justify-between">
+    <main className="bg-gray-50 min-h-screen pt-10 pb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white p-8 rounded-lg mb-8 border border-primary flex flex-col md:flex-row md:items-center md:justify-between shadow-sm">
           <div>
-            <h1 className=" mb-2">{userData.name}&apos;s Posts</h1>
-            <p className="text-black flex items-center">
-               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-               {userData.email} | ID: {userId}
+            <h1 className="text-3xl font-bold mb-2">{userData.name}&apos;s Posts</h1>
+            <p className="text-gray-600 flex items-center">
+               <span className="font-medium">{userData.email}</span> 
+               <span className="mx-2">|</span> 
+               User ID: {userId}
             </p>
           </div>
           <div className="mt-4 md:mt-0">
-            <span className="inline-block px-4 py-2 bg-accent text-primary rounded-full text-sm font-semibold">
-              Member Profile
+            <span className="inline-block px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-semibold border border-blue-100">
+              Active Member
             </span>
           </div>
         </div>
