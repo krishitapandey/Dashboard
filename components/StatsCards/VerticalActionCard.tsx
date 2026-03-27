@@ -27,10 +27,11 @@ export const VerticalActionCard = ({ data, onClick }: { data: CardData, onClick:
         </svg>
       </motion.div>
 
-      {/* The Actual Card that Morphs */}
+
       <motion.div
         layoutId={data.id}
         layout
+        onClick={onClick} 
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="h-full"
       >
