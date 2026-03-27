@@ -1,0 +1,111 @@
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fonts/Nohemi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fonts/Nohemi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./fonts/Nohemi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+@theme inline {
+  --color-primary: hsl(213, 100%, 12%);
+  --color-primary-foreground: hsl(210, 40%, 98%);
+  
+  --color-secondary: hsl(210, 60%, 96%);
+  --color-secondary-foreground: hsl(213, 100%, 12%);
+  
+  --color-accent: hsl(213, 100%, 96%);
+  --color-accent-foreground: hsl(213, 100%, 12%);
+  
+  --color-background: hsl(210, 40%, 98%);
+  --color-foreground: hsl(215, 60%, 5%);
+  
+  --color-border: hsl(220, 10%, 90%);
+  --color-border-primary: hsl(213, 100%, 12%);
+  
+  --color-muted: hsl(210, 30%, 94%);
+  --color-muted-foreground: hsl(215, 20%, 40%);
+  
+  --color-card: hsl(0, 0%, 100%);
+  --color-card-foreground: hsl(215, 60%, 5%);
+  
+  --color-destructive: hsl(0, 84%, 60%);
+  --color-destructive-foreground: hsl(0, 0%, 100%);
+  
+  --font-sans: var(--font-outfit);
+  --font-nohemi: 'Nohemi', sans-serif;
+  --radius-lg: 0.5rem;
+
+  --color-brand-red: #F45B5B;
+  --color-brand-teal: #4A9BAF;
+  --color-brand-purple: #7C6BB0;
+  --color-button-shadow: #FAFAFA;
+  --color-brand-gold: #A88964;
+  --color-brand-green: var(--color-green-500);
+  --color-dark-text: #1a1a1a;
+
+  --font-nohemi: var(--font-nohemi); 
+  --font-outfit: var(--font-outfit);
+  --font-sans: var(--font-outfit);
+
+  @keyframes journeyFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+
+  --animation-journey-float: journeyFloat 3s ease-in-out infinite;
+
+}
+
+@layer base {
+  * {
+    @apply border-border outline-primary;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-primary leading-tight;
+  }
+  h2 {
+    @apply text-3xl sm:text-4xl font-bold tracking-tight text-primary leading-tight;
+  }
+  h3 {
+    @apply text-2xl sm:text-3xl font-bold text-primary;
+  }
+  h4 {
+    @apply text-xl sm:text-2xl font-semibold text-primary ;
+  }
+  .text-dark {
+    @apply text-[--color-dark-text];
+  }
+  .text-brand-green {
+    @apply text-brand-green;
+  }
+}
+
+@layer components {
+  .animate-journey-float {
+    animation: var(--animation-journey-float);
+  }
+}
