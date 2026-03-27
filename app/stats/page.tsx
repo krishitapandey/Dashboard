@@ -15,7 +15,7 @@ export default function CourseStats() {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6 font-sans select-none overflow-hidden">
-      <header className="mb-12 text-center lg:text-left">
+      <header className="mb-32 text-center lg:text-left">
         <h2 className="text-[32px] font-bold tracking-tight text-dark-text">
           Dive Into <span className="text-brand-green">What's Hot Right Now!</span> 
         </h2>
