@@ -3,17 +3,12 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PostFormValues, postSchema } from '@/types/schema/postSchema';
-import { Post } from '@/types/post.types';
+import {  PostFormProps } from '@/types/post.types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
  
-interface PostFormProps {
-  userId: number;
-  initialData?: Post;
-  onSubmit: (post: Post | Omit<Post, 'id'>) => void;
-}
- 
+
 export default function PostForm({ userId, initialData, onSubmit }: PostFormProps) {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<PostFormValues>({
     resolver: zodResolver(postSchema),

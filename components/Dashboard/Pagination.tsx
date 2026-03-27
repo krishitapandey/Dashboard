@@ -1,12 +1,9 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { PaginationProps } from '@/types/pagination.types';
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: (prev: number) => number) => void;
-}
+
 
 export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
   if (totalPages <= 1) return null;

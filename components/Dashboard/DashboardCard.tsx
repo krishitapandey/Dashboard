@@ -1,17 +1,11 @@
-// components/ui/NavigationCard.tsx
+
 import Link from 'next/link';
 import { Card, CardHeader, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { NavigationCardProps } from '@/types/dashboard.types';
 
-interface NavigationCardProps {
-  href: string;
-  icon: React.ElementType;
-  title: string;
-  subtitle: string;
-  buttonText?: string;
-  className?: string;
-}
+
 
 export default function NavigationCard({
   href,

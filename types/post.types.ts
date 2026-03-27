@@ -12,3 +12,10 @@ export interface PostState {
   deletePost: (userId: number, postId: number) => void;
   updatePost: (userId: number, post: Post) => void;
 }
+
+export interface PostFormProps {
+  userId: number;
+  initialData?: Post;
+  onSubmit: (post: Post | Omit<Post, 'id'>) => void;
+}
+ 
